@@ -1,5 +1,7 @@
 import React, { ComponentProps, FunctionComponent, useState } from "react";
+import SideNav from "./sidenav";
 import Editor from "./editor";
+import TitleBar from "./titlebar";
 
 type EditorProps = Omit<ComponentProps<typeof Editor>, "active">;
 
@@ -21,22 +23,9 @@ const WorkBench: FunctionComponent = () => {
 
   return (
     <div className="w-full m-2 flex-1 flex flex-col bg-[#1c1c1c] rounded-xl">
-      {/* Menu bar */}
-      <div className="w-full bg-[#2e2e2e] rounded-t-xl flex items-center bg-offset p-3 py-1">
-        <div className="flex space-x-[7px]">
-          <div className="h-[11px] w-[11px] rounded-full bg-[#ff605c]"></div>
-          <div className="h-[11px] w-[11px] rounded-full bg-[#ffbd44]"></div>
-          <div className="h-[11px] w-[11px] rounded-full bg-[#00ca4e]"></div>
-        </div>
-        <div className="flex-1 text-center text-xs text-[#7a7a7a]">
-          Maruyama Tomoki
-        </div>
-      </div>
-
-      {/* Main Content*/}
+      <TitleBar />
       <div className="flex-1 flex flex-row">
-        {/* Icons */}
-        <div className="w-12 bg-[#2e2e2e] rounded-bl-xl"></div>
+        <SideNav />
         {/* Tree pain */}
         <div className="w-1/6 bg-[#262626]"></div>
         {/* Editor tabs */}
