@@ -4,13 +4,16 @@ import path from "path";
 import fs from "fs/promises";
 import Layout from "../components/layout";
 import WorkBench from "../components/workbench";
-import { Node, Dir } from "../components/tree";
+import { Node, Dir, treeState } from "../store/app";
+import { useSetRecoilState } from "recoil";
 
-type WorkBenchProps = ComponentProps<typeof WorkBench>;
+type IndexProps = {
+  root: Node;
+};
 
 const contentsDir = path.join(process.cwd(), "contents");
 
-const getStaticProps: GetStaticProps<WorkBenchProps> = async () => {
+const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const readRecursive = async (parent: Dir, dirname: string) => {
     const dirents = await fs.readdir(dirname, { withFileTypes: true });
     for (const dirent of dirents) {
@@ -42,10 +45,13 @@ const getStaticProps: GetStaticProps<WorkBenchProps> = async () => {
   return { props: { root: contentNode } };
 };
 
-const Home: NextPage<WorkBenchProps> = ({ root }) => {
+const Home: NextPage<IndexProps> = ({ root }) => {
+  const setTree = useSetRecoilState(treeState);
+  setTree(root);
+
   return (
     <Layout>
-      <WorkBench root={root} />
+      <WorkBench />
     </Layout>
   );
 };

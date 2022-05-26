@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from "react";
-import Tree, { Node } from "./tree";
+import Tree from "./tree";
+import { treeState } from "../store/app";
+import { useRecoilValue } from "recoil";
 
-type ExplorerProps = {
-  nodes: Node[];
-};
-
-const Explorer: FunctionComponent<ExplorerProps> = ({ nodes }) => {
+const Explorer: FunctionComponent = () => {
+  const tree = useRecoilValue(treeState);
   return (
     <div className="w-1/6 bg-[#262626] text-[#c1c1c1]">
       <div className="text-xs pt-2 pb-2 pl-5">EXPLORER</div>
-      <Tree nodes={nodes} level={0} initCollapse={false} />
+      <Tree nodes={[tree!!]} level={0} initCollapse={false} />
     </div>
   );
 };

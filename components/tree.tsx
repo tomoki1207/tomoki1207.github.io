@@ -1,20 +1,7 @@
 import React, { FunctionComponent } from "react";
 import TreeNodeDir from "./tree-node-dir";
 import TreeNodeFile from "./tree-node-file";
-
-export type Node = File | Dir;
-
-export type File = {
-  type: "File";
-  name: string;
-  ext: string;
-};
-
-export type Dir = {
-  type: "Directory";
-  name: string;
-  children: Node[];
-};
+import { Node } from "../store/app";
 
 type TreeProps = {
   nodes: Node[];

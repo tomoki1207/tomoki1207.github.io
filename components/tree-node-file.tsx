@@ -1,35 +1,24 @@
 import React, { FunctionComponent } from "react";
-import themeJson from "../lib/vs-seti-icon-theme.json";
-import { File } from "./tree";
+import { useSetRecoilState } from "recoil";
+import { resolveIcon } from "../lib/file-icon";
+import { File, activeEditorState } from "../store/app";
 
 type TreeNodeFileProps = {
   node: File;
   level: number;
 };
 
-const knownInconsistencies: {
-  [key: string]: keyof typeof themeJson.languageIds;
-} = {
-  ".md": "markdown",
-};
-
 const TreeNodeFile: FunctionComponent<TreeNodeFileProps> = ({
   node,
   level,
 }) => {
+  const setActiveEditor = useSetRecoilState(activeEditorState);
+
   const hanndleClick = () => {
-    console.log({ node });
+    setActiveEditor({ ...node, active: true });
   };
 
-  const id: string =
-    (themeJson.fileNames as any)[node.name.toLowerCase()] ||
-    (themeJson.fileExtensions as any)[node.ext.replace(".", "")] ||
-    (themeJson.languageIds as any)[knownInconsistencies[node.ext]] ||
-    "_default";
-  const def = (themeJson.iconDefinitions as any)[id] as {
-    fontCharacter: string;
-    fontColor: string;
-  };
+  const { id, def } = resolveIcon(node.name, node.ext);
 
   return (
     <li

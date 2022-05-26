@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { VscChevronDown, VscChevronRight } from "react-icons/vsc";
-import Tree, { Dir } from "./tree";
+import Tree from "./tree";
+import { Dir } from "../store/app";
 
 type TreeNodeDirProps = {
   node: Dir;

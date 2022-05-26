@@ -1,17 +1,16 @@
 import React, { FunctionComponent } from "react";
+import { EditorFile } from "../store/app";
 
 type EditorProps = {
-  active: Boolean;
-  title: String;
-  content: String;
+  file: EditorFile;
 };
 
-const Editor: FunctionComponent<EditorProps> = ({ active, title, content }) => {
+const Editor: FunctionComponent<EditorProps> = ({ file }) => {
   return (
-    <div>
-      title: {title} {active && <span>*</span>}
+    <div className="bg-gray-500">
+      title: {file.name} {file.active && <span>*</span>}
       <br />
-      content: {content}
+      content: {file.type}
     </div>
   );
 };
