@@ -14,7 +14,7 @@ const TreeNodeFile: FunctionComponent<TreeNodeFileProps> = ({
 }) => {
   const setActiveEditor = useSetRecoilState(activeEditorState);
 
-  const hanndleClick = () => {
+  const handleClick = () => {
     setActiveEditor({ ...node, active: true });
   };
 
@@ -22,7 +22,7 @@ const TreeNodeFile: FunctionComponent<TreeNodeFileProps> = ({
 
   return (
     <li
-      onClick={hanndleClick}
+      onClick={handleClick}
       className="cursor-pointer flex items-center hover:bg-[hsla(0,0%,100%,.05)]"
     >
       <style>

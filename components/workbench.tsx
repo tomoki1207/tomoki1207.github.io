@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import TitleBar from "./titlebar";
 import SideNav from "./sidenav";
 import Explorer from "./explorer";
-import Editor from "./editor";
+import EditorTab from "./editor-tab";
 import { editorsState } from "../store/app";
 import { useRecoilValue } from "recoil";
 
@@ -16,10 +16,12 @@ const WorkBench: FunctionComponent = () => {
         <SideNav />
         <Explorer />
         {/* Editor tabs */}
-        <div className="flex-1">
-          {editors.map((editor, i) => (
-            <Editor key={i} file={editor} />
-          ))}
+        <div className="flex-1 bg-[#262626]">
+          <div className="flex flex-row">
+            {editors.map((editor, i) => (
+              <EditorTab key={i} file={editor} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
