@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "seti";
+  src: url("/fonts/seti.woff") format("woff"); 
+}
+
+.icon::before {
+  font-family: seti !important;
+  font-style: normal;
+  font-weight: normal !important;
+  vertical-align: top;
+}

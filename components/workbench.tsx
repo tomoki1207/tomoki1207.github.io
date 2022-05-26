@@ -1,11 +1,17 @@
 import React, { ComponentProps, FunctionComponent, useState } from "react";
-import SideNav from "./sidenav";
-import Editor from "./editor";
 import TitleBar from "./titlebar";
+import SideNav from "./sidenav";
+import Explorer from "./explorer";
+import Editor from "./editor";
+import { Node } from "./tree";
+
+type WorkBenchProps = {
+  root: Node;
+};
 
 type EditorProps = Omit<ComponentProps<typeof Editor>, "active">;
 
-const WorkBench: FunctionComponent = () => {
+const WorkBench: FunctionComponent<WorkBenchProps> = ({ root }) => {
   const [editors, setEditors] = useState([] as EditorProps[]);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -26,8 +32,7 @@ const WorkBench: FunctionComponent = () => {
       <TitleBar />
       <div className="flex-1 flex flex-row">
         <SideNav />
-        {/* Tree pain */}
-        <div className="w-1/6 bg-[#262626]"></div>
+        <Explorer nodes={[root]} />
         {/* Editor tabs */}
         <div className="flex-1">
           <button onClick={addEditor}>追加</button>

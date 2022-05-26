@@ -1,16 +1,12 @@
 import React, { FunctionComponent } from "react";
 
-type EdtorProps = {
+type EditorProps = {
   active: Boolean;
   title: String;
   content: String;
 };
 
-const Editor: FunctionComponent<EdtorProps> = ({
-  active,
-  title,
-  content,
-}: EdtorProps) => {
+const Editor: FunctionComponent<EditorProps> = ({ active, title, content }) => {
   return (
     <div>
       title: {title} {active && <span>*</span>}
