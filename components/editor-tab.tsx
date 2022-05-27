@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState, MouseEvent } from "react";
 import { useSetRecoilState } from "recoil";
 import { VscClose } from "react-icons/vsc";
 import { resolveIcon } from "../lib/file-icon";
-import { EditorFile, activeEditorState } from "../store/app";
+import { EditorFile, activeEditorState, editorState } from "../store/app";
 
 type EditorProps = {
   file: EditorFile;
@@ -11,12 +11,16 @@ type EditorProps = {
 const EditorTab: FunctionComponent<EditorProps> = ({ file }) => {
   const [showClose, setShowClose] = useState(false);
   const setActive = useSetRecoilState(activeEditorState);
+  const setEditor = useSetRecoilState(editorState(file.name));
 
   const handleClick = () => {
     setActive({ ...file, active: true });
   };
 
-  const handleClose = () => {};
+  const handleClose = (e: MouseEvent) => {
+    setEditor(null);
+    e.stopPropagation();
+  };
 
   const handleMouseEnter = () => {
     setShowClose(true);
@@ -44,12 +48,14 @@ const EditorTab: FunctionComponent<EditorProps> = ({ file }) => {
           {file.name}
         </span>
       </span>
-      <VscClose
-        onClick={handleClose}
-        className={`mr-2 h-[1.1em] w-[1.1em] ${
-          file.active ? "text-white" : "text-gray-400"
-        } ${file.active || showClose ? "visible" : "invisible"}`}
-      />
+      <span className="mr-2 p-[2px] rounded hover:bg-[hsla(0,0%,100%,.125)]">
+        <VscClose
+          onClick={handleClose}
+          className={`${file.active ? "text-white" : "text-gray-400"} ${
+            file.active || showClose ? "visible" : "invisible"
+          }`}
+        />
+      </span>
     </label>
   );
 };

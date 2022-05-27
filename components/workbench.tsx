@@ -18,8 +18,8 @@ const WorkBench: FunctionComponent = () => {
         {/* Editor tabs */}
         <div className="flex-1 bg-[#262626]">
           <div className="flex flex-row">
-            {editors.map((editor, i) => (
-              <EditorTab key={i} file={editor} />
+            {editors.map((editor) => (
+              <EditorTab key={editor.name} file={editor} />
             ))}
           </div>
         </div>

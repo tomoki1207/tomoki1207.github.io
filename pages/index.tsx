@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
-import { ComponentProps } from "react";
+import { ComponentProps, useEffect } from "react";
 import path from "path";
 import fs from "fs/promises";
 import Layout from "../components/layout";
@@ -41,13 +41,15 @@ const getStaticProps: GetStaticProps<IndexProps> = async () => {
     children: [],
   };
   await readRecursive(contentNode, contentsDir);
-  console.log(contentNode);
   return { props: { root: contentNode } };
 };
 
 const Home: NextPage<IndexProps> = ({ root }) => {
   const setTree = useSetRecoilState(treeState);
-  setTree(root);
+
+  useEffect(() => {
+    setTree(root);
+  });
 
   return (
     <Layout>
