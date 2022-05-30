@@ -11,7 +11,7 @@ type EditorProps = {
 const EditorTab: FunctionComponent<EditorProps> = ({ file }) => {
   const [showClose, setShowClose] = useState(false);
   const setActive = useSetRecoilState(activeEditorState);
-  const setEditor = useSetRecoilState(editorState(file.name));
+  const setEditor = useSetRecoilState(editorState(file.path));
 
   const handleClick = () => {
     setActive({ ...file, active: true });
@@ -37,7 +37,7 @@ const EditorTab: FunctionComponent<EditorProps> = ({ file }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={`w-40 h-9 cursor-pointer flex items-center justify-between border-[#171717] border-r-[1px] ${
-        file.active ? "bg-[#171717]" : "bg-[#222]"
+        file.active ? "bg-[#1e1e1e]" : "bg-[#2d2d2d]"
       }`}
     >
       <span className="ml-4 flex-shrink-0 flex">

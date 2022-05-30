@@ -11,7 +11,7 @@ type IndexProps = {
   root: Node;
 };
 
-const contentsDir = path.join(process.cwd(), "contents");
+const contentsDir = path.join(process.cwd(), "public/contents");
 
 const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const readRecursive = async (parent: Dir, dirname: string) => {
@@ -21,6 +21,7 @@ const getStaticProps: GetStaticProps<IndexProps> = async () => {
         parent.children.push({
           type: "File",
           name: dirent.name,
+          path: `${parent.path}/${dirent.name}`,
           ext: path.extname(dirent.name),
         });
         continue;
@@ -28,6 +29,7 @@ const getStaticProps: GetStaticProps<IndexProps> = async () => {
       const subDir: Node = {
         type: "Directory",
         name: dirent.name,
+        path: `${parent.path}/${dirent.name}`,
         children: [],
       };
       parent.children.push(subDir);
@@ -38,6 +40,7 @@ const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const contentNode: Node = {
     type: "Directory",
     name: "tomoki1207",
+    path: "/contents",
     children: [],
   };
   await readRecursive(contentNode, contentsDir);

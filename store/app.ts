@@ -5,12 +5,14 @@ export type Node = File | Dir;
 export type File = {
   type: "File";
   name: string;
+  path: string;
   ext: string;
 };
 
 export type Dir = {
   type: "Directory";
   name: string;
+  path: string;
   children: Node[];
 };
 
@@ -34,7 +36,7 @@ export const activeEditorState = selector<EditorFile | null>({
       return;
     }
     const newFiles = get(editorsState).map((file) => {
-      if (file.name === newValue.name && file.ext === newValue.ext) {
+      if (file.path === newValue.path) {
         return { ...file, active: true };
       }
       return { ...file, active: false };
@@ -50,12 +52,12 @@ export const activeEditorState = selector<EditorFile | null>({
 export const editorState = selectorFamily<EditorFile | null, string>({
   key: "editor",
   get:
-    (name) =>
+    (path) =>
     ({ get }) =>
-      get(editorsState).find((file) => file.name === name) || null,
+      get(editorsState).find((file) => file.path === path) || null,
   // only for remove, for replace logic is NOT confirmed yet.
   set:
-    (name) =>
+    (path) =>
     ({ get, set }, newValue) => {
       if (newValue instanceof DefaultValue) {
         return;
@@ -64,7 +66,7 @@ export const editorState = selectorFamily<EditorFile | null, string>({
       const activeIndex = get(editorsState).findIndex((file) => file.active);
       const newFiles = get(editorsState)
         .map((file) => {
-          if (file.name === name) {
+          if (file.path === path) {
             return newValue && { ...newValue, active: file.active };
           }
           return { ...file };
@@ -72,7 +74,7 @@ export const editorState = selectorFamily<EditorFile | null, string>({
         .filter((file): file is EditorFile => file !== null);
 
       if (newFiles.length > 0 && newFiles.every((file) => !file.active)) {
-        const nextActiveIndex = Math.min(activeIndex + 1, newFiles.length - 1);
+        const nextActiveIndex = Math.min(activeIndex, newFiles.length - 1);
         newFiles.at(nextActiveIndex)!!.active = true;
       }
       set(editorsState, newFiles);

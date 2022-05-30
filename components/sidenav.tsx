@@ -10,7 +10,7 @@ import {
 
 const SideNav: FunctionComponent = () => {
   return (
-    <div className="w-12 bg-[#2e2e2e] rounded-bl-xl flex flex-col items-center text-[#727272]">
+    <div className="w-12 bg-[#3c3c3c] rounded-bl-xl flex flex-col items-center text-[#858585]">
       <div className="w-full mt-4 flex-1 flex flex-col space-y-6 items-center">
         <div className="w-full border-l-2 border-white text-white flex justify-center">
           <VscFiles className="h-[1.5em] w-[1.5em] " />
