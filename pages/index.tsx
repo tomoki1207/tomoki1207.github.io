@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
-import { ComponentProps, useEffect } from "react";
+import { useEffect } from "react";
 import path from "path";
 import fs from "fs/promises";
 import Layout from "../components/layout";

@@ -17,7 +17,7 @@ const WorkBench: FunctionComponent = () => {
       <div className="flex-1 flex flex-row">
         <SideNav />
         <Explorer />
-        <div className="flex flex-col flex-1 bg-[#262626] rounded-br-xl">
+        <div className="h-[92vh] overflow-y-hidden flex-1 flex flex-col bg-[#262626] rounded-br-xl">
           {/* Editor tabs */}
           <div className="flex flex-row">
             {editors.map((editor) => (
@@ -26,7 +26,7 @@ const WorkBench: FunctionComponent = () => {
           </div>
           {/* Editor */}
           {activeEditor && (
-            <div className="h-full mb-4 bg-[#1e1e1e]">
+            <div className="max-w-full py-1 flex-1 overflow-y-scroll bg-[#1e1e1e]">
               <Editor file={activeEditor} />
             </div>
           )}
