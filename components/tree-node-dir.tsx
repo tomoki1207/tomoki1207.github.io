@@ -18,7 +18,7 @@ const TreeNodeDir: FunctionComponent<TreeNodeDirProps> = ({
 
   useEffect(() => {
     setColleapse(initCollapse);
-  }, []);
+  }, [initCollapse]);
 
   const toggleCollapse = () => {
     setColleapse(!colleapse);

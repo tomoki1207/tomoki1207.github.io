@@ -1,11 +1,18 @@
 /* eslint-disable react/jsx-key */
 import React, { FunctionComponent, useEffect, useState } from "react";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import Prism from "prismjs";
+import Highlight, { Language } from "prism-react-renderer";
 import vsDark from "prism-react-renderer/themes/vsDark";
+
+// additional langs
+require("prismjs/components/prism-ini");
+require("prismjs/components/prism-editorconfig");
+
+type SupportedLangages = Language | "ini" | "editorconfig";
 
 type CodeViewerProps = {
   path: string;
-  lang: Language;
+  lang: SupportedLangages;
 };
 
 const CodeViewer: FunctionComponent<CodeViewerProps> = ({ path, lang }) => {
@@ -20,10 +27,15 @@ const CodeViewer: FunctionComponent<CodeViewerProps> = ({ path, lang }) => {
   });
 
   return (
-    <Highlight {...defaultProps} code={content} language={lang} theme={vsDark}>
+    <Highlight
+      Prism={Prism as any}
+      code={content}
+      language={lang as any}
+      theme={vsDark}
+    >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={className + "py-2 text-sm hover:cursor-text"}
+          className={className + " py-2 text-sm hover:cursor-text"}
           style={style}
         >
           {tokens.map((line, i) => (

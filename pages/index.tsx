@@ -15,7 +15,17 @@ const contentsDir = path.join(process.cwd(), "public/contents");
 
 const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const readRecursive = async (parent: Dir, dirname: string) => {
-    const dirents = await fs.readdir(dirname, { withFileTypes: true });
+    const dirents = (await fs.readdir(dirname, { withFileTypes: true })).sort(
+      (a, b) => {
+        if (a.isDirectory() && !b.isDirectory()) {
+          return -1;
+        }
+        if (!a.isDirectory() && b.isDirectory()) {
+          return 1;
+        }
+        return a.name.localeCompare(b.name);
+      }
+    );
     for (const dirent of dirents) {
       if (dirent.isFile()) {
         parent.children.push({

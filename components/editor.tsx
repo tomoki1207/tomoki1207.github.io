@@ -17,6 +17,11 @@ const Editor: FunctionComponent<EditorProps> = ({ file }) => {
     case "_markdown":
     case "_info":
       return <CodeViewer path={file.path} lang="markdown" />;
+    case "_config":
+      if (file.ext === ".editoconfig") {
+        return <CodeViewer path={file.path} lang="editorconfig" />;
+      }
+      return <CodeViewer path={file.path} lang="ini" />;
     default: {
       return (
         <span className="p-2 text-[#858585] italic">

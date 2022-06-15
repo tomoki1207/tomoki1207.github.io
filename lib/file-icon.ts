@@ -6,12 +6,15 @@ const knownInconsistencies: {
   ".md": "markdown",
 };
 
+const normalize = (name?: string) =>
+  name ? name.toLowerCase().replace(/^\./, "") : "";
+
 export const resolveId = (
   fileName?: string,
   ext?: string
 ): keyof typeof themeJson.iconDefinitions =>
-  (themeJson.fileNames as any)[fileName?.toLowerCase() || ""] ||
-  (themeJson.fileExtensions as any)[ext?.replace(".", "") || ""] ||
+  (themeJson.fileNames as any)[normalize(fileName)] ||
+  (themeJson.fileExtensions as any)[normalize(ext || fileName)] ||
   (themeJson.languageIds as any)[knownInconsistencies[ext || ""]] ||
   "_default";
 
