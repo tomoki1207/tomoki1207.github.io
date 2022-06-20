@@ -6,6 +6,7 @@ import EditorTab from "./editor-tab";
 import { editorsState, activeEditorState } from "../store/app";
 import { useRecoilValue } from "recoil";
 import Editor from "./editor";
+import EditorActions from "./editor-actions";
 
 const WorkBench: FunctionComponent = () => {
   const editors = useRecoilValue(editorsState);
@@ -23,6 +24,7 @@ const WorkBench: FunctionComponent = () => {
               {editors.map((editor) => (
                 <EditorTab key={editor.path} file={editor} />
               ))}
+              <EditorActions />
             </div>
           )}
           {activeEditor ? (

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, MouseEvent } from "react";
 import { useSetRecoilState } from "recoil";
-import { VscClose } from "react-icons/vsc";
+import { VscClose, VscPreview } from "react-icons/vsc";
 import { resolveIcon } from "../lib/file-icon";
 import { EditorFile, activeEditorState, editorState } from "../store/app";
 
@@ -42,7 +42,13 @@ const EditorTab: FunctionComponent<EditorProps> = ({ file }) => {
     >
       <span className="ml-4 flex-shrink-0 flex">
         <span className="w-5">
-          <span className={`icon icon${id}`} />
+          {file.path.endsWith(".preview") ? (
+            <span className="flex h-full items-center">
+              <VscPreview className=" fill-white" />
+            </span>
+          ) : (
+            <span className={`icon icon${id}`} />
+          )}
         </span>
         <span className={file.active ? "text-white" : "text-gray-400"}>
           {file.name}
