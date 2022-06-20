@@ -1,3 +1,8 @@
-# tomoki1207
+# Maruyama Tomoki - @tomoki1207
 
-https://tomoki1207.dev
+Hi, I'm a software engineer.👋
+
+## Get in touch
+
+* Email: 👈
+* Personal site: https://tomoki1207.dev
