@@ -6,6 +6,7 @@ import vsDark from "prism-react-renderer/themes/vsDark";
 
 // additional langs
 require("prismjs/components/prism-ini");
+require("prismjs/components/prism-markdown");
 require("prismjs/components/prism-editorconfig");
 
 type SupportedLangages = Language | "ini" | "editorconfig";
